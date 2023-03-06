@@ -31,6 +31,8 @@ authProvider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, authProvider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, authProvider);
+
 const db = getFirestore();
 
 export const createUserDocumentFormAuth = async (userAuth) => {
