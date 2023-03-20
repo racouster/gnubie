@@ -76,7 +76,7 @@ const SignUpForm = () => {
                 </ul> 
             : 
                 <></>}
-            <form onSubmit={handleSubmit}>
+            <form name="sign-up" onSubmit={handleSubmit}>
                 <FormInput label='Display Name' name='displayName' type='text' required onChange={handleChange} value={displayName}/>
                 
                 <FormInput label='Email' name='email' type='email' required onChange={handleChange} value={email}/>

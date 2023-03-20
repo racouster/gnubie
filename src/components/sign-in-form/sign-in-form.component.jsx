@@ -35,20 +35,33 @@ const SignInForm = () => {
     }
 
     const handleSubmit = async (event) => {
+        event.prventDefault();
+        
         try {
             const { user } = await signInWithGoogleEmailAndPassword(email, password);
-            await createUserDocumentFromAuth(user);
-
+            if (user)
+                await createUserDocumentFromAuth(user);
         } catch (error) {
-
+            switch (error.code) {
+                case 'auth/wrong-password':
+                    alert('Incorrect password.')
+                    break;
+                case 'auth/user-not-found':
+                    alert('User does not exist.')
+                    break;
+                default:
+                    console.log(error);
+                    break;
+            }
         }
+        return false;
     }
 
     return (
         <div className="sign-in-container">
             <h2>Already have an account?</h2>
             <span>Sign in with your email and password</span>
-            <form onSubmit={handleSubmit}>
+            <form name="sign-in" onSubmit={handleSubmit}>
                 <FormInput label='Email' name='email' type='email' required onChange={handleChange} value={email} />
                 <FormInput label='Password' name='password' type='password' required onChange={handleChange} value={password} />
                 <div className="buttons-container">
