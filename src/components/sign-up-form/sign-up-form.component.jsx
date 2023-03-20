@@ -20,7 +20,7 @@ const SignUpForm = () => {
 
     console.log(formFields);
 
-    const handleFormChange = (event) => {
+    const handleChange = (event) => {
         const { name, value } = event.target;
         setFormFields({...formFields, [name]: value});
     }
@@ -77,13 +77,13 @@ const SignUpForm = () => {
             : 
                 <></>}
             <form onSubmit={handleSubmit}>
-                <FormInput label='Display Name' name='displayName' type='text' required onChange={handleFormChange} value={displayName}/>
+                <FormInput label='Display Name' name='displayName' type='text' required onChange={handleChange} value={displayName}/>
                 
-                <FormInput label='Email' name='email' type='email' required onChange={handleFormChange} value={email}/>
+                <FormInput label='Email' name='email' type='email' required onChange={handleChange} value={email}/>
 
-                <FormInput label='Password' name='password' type='password' required onChange={handleFormChange} value={password}/>
+                <FormInput label='Password' name='password' type='password' required onChange={handleChange} value={password}/>
 
-                <FormInput label='Confirm Password' name='confirmPassword' type='password' required onChange={handleFormChange} value={confirmPassword}/>
+                <FormInput label='Confirm Password' name='confirmPassword' type='password' required onChange={handleChange} value={confirmPassword}/>
 
                 <Button type='submit'>Sign Up</Button>
             </form>
