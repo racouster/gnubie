@@ -18,7 +18,6 @@ const handleSignInWithPopup = async (event) => {
 
 const handleSignInWithRedirect = async (event) => {
     const response = signInWithGoogleRedirect();
-    console.log(response);
 }
 
 const defaultFormFields = {
@@ -66,7 +65,7 @@ const SignInForm = () => {
                 <FormInput label='Password' name='password' type='password' required onChange={handleChange} value={password} />
                 <div className="buttons-container">
                     <Button type='submit'>Sign in</Button>
-                    <Button onClick={handleSignInWithPopup} buttonType='google'>Sign in with Google Popup</Button>
+                    <Button type='button' onClick={handleSignInWithPopup} buttonType='google'>Sign in with Google Popup</Button>
                     {/* <Button onClick={handleSignInWithRedirect} buttonType='google'>Sign in with Google Redirect</Button> */}
                 </div>
             </form>
