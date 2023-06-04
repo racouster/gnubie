@@ -7,13 +7,16 @@ import App from './App';
 import { UserContextProvider } from './contexts/user.context';
 
 import './index.scss';
+import { ProductsContextProvider } from './contexts/product.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserContextProvider>
-        <App />
+        <ProductsContextProvider>
+          <App />
+        </ProductsContextProvider>
       </UserContextProvider>
     </BrowserRouter>
   </React.StrictMode>
