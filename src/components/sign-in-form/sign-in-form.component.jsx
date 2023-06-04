@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
     signInWithGooglePopup,
-    signInWithGoogleRedirect,
+    // signInWithGoogleRedirect,
     signInWithGoogleEmailAndPassword,
     createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.util"
@@ -11,15 +11,6 @@ import FormInput from "../form-input/form-input.component";
 
 import './sign-in-form.styles.scss'
 
-const handleSignInWithPopup = async (event) => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
-}
-
-const handleSignInWithRedirect = async (event) => {
-    const response = signInWithGoogleRedirect();
-}
-
 const defaultFormFields = {
     email: '',
     password: ''
@@ -28,18 +19,17 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
-    const handleChange = (event) => {
+    const handleChange = async (event) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
     }
 
     const handleSubmit = async (event) => {
-        event.prventDefault();
-        
+        event.preventDefault();
+
+        // TODO: Sign out? if signing in? What if accounts differ?
         try {
-            const { user } = await signInWithGoogleEmailAndPassword(email, password);
-            if (user)
-                await createUserDocumentFromAuth(user);
+            await signInWithGoogleEmailAndPassword(email, password);
         } catch (error) {
             switch (error.code) {
                 case 'auth/wrong-password':
@@ -55,6 +45,14 @@ const SignInForm = () => {
         }
         return false;
     }
+    
+    const handleSignInWithPopup = async (event) => {
+        await signInWithGooglePopup();
+    }
+    
+    // const handleSignInWithRedirect = async (event) => {
+    //     signInWithGoogleRedirect();
+    // }
 
     return (
         <div className="sign-in-container">

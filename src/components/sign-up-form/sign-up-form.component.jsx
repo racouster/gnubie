@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.util'
+
 import FormInput from '../form-input/form-input.component'
 import Button from "../button/button.component";
 
@@ -18,8 +19,6 @@ const SignUpForm = () => {
     const { displayName, email, password, confirmPassword } = formFields;
     const [validationErrors, setValidationErrors] = useState([]);
 
-    console.log(formFields);
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormFields({...formFields, [name]: value});
@@ -37,11 +36,11 @@ const SignUpForm = () => {
         if (password !== confirmPassword) {
             newErrors.push('Password doesn\'t match confirmation password.');
         }
+        
         const minPassLength = 6;
         if (password.length < minPassLength) {
             newErrors.push(`Password is too short. At least ${minPassLength} letters, numbers and symbols.`);
         }
-        
 
         if (newErrors.length) {
             setValidationErrors(newErrors);
@@ -49,12 +48,12 @@ const SignUpForm = () => {
         }
 
         try {
-            const createResponse = await createAuthUserWithEmailAndPassword(email, password);
-            console.log(createResponse);
-            
-            if (createResponse) {
-                const userDocRef = await createUserDocumentFromAuth(createResponse.user, { displayName });
+            const { user } = await createAuthUserWithEmailAndPassword(email, password);
+
+            if (user) {
+                const userDocRef = await createUserDocumentFromAuth(user, { displayName });
                 console.log(userDocRef);
+                
                 resetFormFields();
             }
         } catch (error) {
