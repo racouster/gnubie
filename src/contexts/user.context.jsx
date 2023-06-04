@@ -11,11 +11,11 @@ export const UserContextProvider = ({ children }) => {
     const currentUserState = { currentUser, setCurrentUser };
 
     useEffect(() => {
-        var unsubscribeAuthStateChangedListener = onAuthStateChangedListener(async (auth) => {
-            if (auth ?? auth.user) {
-                await createUserDocumentFromAuth(auth.user);
+        var unsubscribeAuthStateChangedListener = onAuthStateChangedListener(async (user) => {
+            if (user) {
+                await createUserDocumentFromAuth(user);
             }
-            setCurrentUser(auth.user);
+            setCurrentUser(user);
         });
 
         return unsubscribeAuthStateChangedListener;
