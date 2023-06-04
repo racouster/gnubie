@@ -3,7 +3,6 @@ import {
     signInWithGooglePopup,
     // signInWithGoogleRedirect,
     signInWithGoogleEmailAndPassword,
-    createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.util"
 
 import Button from '../../components/button/button.component'
