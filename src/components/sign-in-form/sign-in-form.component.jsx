@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
     signInWithGooglePopup,
+    // TODO: Do we still need redirect?
     // signInWithGoogleRedirect,
     signInWithGoogleEmailAndPassword,
 } from "../../utils/firebase/firebase.util"
@@ -49,6 +50,7 @@ const SignInForm = () => {
         await signInWithGooglePopup();
     }
     
+    // TODO: Do we still need redirect?
     // const handleSignInWithRedirect = async (event) => {
     //     signInWithGoogleRedirect();
     // }
@@ -63,7 +65,9 @@ const SignInForm = () => {
                 <div className="buttons-container">
                     <Button type='submit'>Sign in</Button>
                     <Button type='button' onClick={handleSignInWithPopup} buttonType='google'>Sign in with Google Popup</Button>
-                    {/* <Button onClick={handleSignInWithRedirect} buttonType='google'>Sign in with Google Redirect</Button> */}
+                    {/*
+                        // TODO: Do we still need redirect?
+                        <Button onClick={handleSignInWithRedirect} buttonType='google'>Sign in with Google Redirect</Button> */}
                 </div>
             </form>
         </div>
