@@ -1,10 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
+
+import { CartContext } from '../../contexts/cart.context';
 import Button from "../button/button.component";
 
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
-    const handleProductClick = (e, product) => console.log(`Navigate to product: ${product.id}`);
+    const {addItemToCart} = useContext(CartContext);
+    const handleProductClick = (e, product) => addItemToCart(product);
     const { name, price, imageUrl } = product;
     return (
         <Fragment>

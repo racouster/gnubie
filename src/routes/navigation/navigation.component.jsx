@@ -6,6 +6,7 @@ import { signOut } from "../../utils/firebase/firebase.util";
 
 import { ReactComponent as CrownLogo } from '../../assets/logo.svg'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
+import CartDropDown from '../../components/cart-dropdown/cart-dropdown.component'
 
 import './navigation.styles.scss'
 
@@ -36,6 +37,7 @@ const Navigation = () => {
                     )}
                     <CartIcon />
                 </div>
+                <CartDropDown />
             </div>
             <Outlet />
         </Fragment>);
