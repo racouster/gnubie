@@ -1,28 +1,37 @@
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
-const CheckoutItem = ({ item }) => { 
-    const { addItemToCart, removeItemsFromCart } = useContext(CartContext);
-    const handleAddClick = (item) => { 
-        addItemToCart(item);
-    }
-    const handleReduceClick = (item, count) => { 
-        removeItemsFromCart(item, count);
-    }
-    const handleRemoveClick = (item) => { 
-        removeItemsFromCart(item, item.quantity);
-    }
+import "./checkout-item.styles.scss";
+
+const CheckoutItem = ({ item: checkoutItem }) => { 
+    const { addItemToCart, removeItemsFromCart, clearItemFromCart } = useContext(CartContext);
+    const { imageUrl, name, quantity, price } = checkoutItem;
+    
+    const addItemHandler = () => addItemToCart(checkoutItem);
+    const reduceItemHandler = () => removeItemsFromCart(checkoutItem);
+    const removeItemHandler = () => clearItemFromCart(checkoutItem);
+
     return (
-        <div className="checkout-item">
-            <img src={item.imageUrl} alt={item.name} />
-            <span className="checkout-name">{item.name}</span>
-            <span className="checkout-quantity">
-                <button onClick={()=> handleReduceClick(item, 1)}>{"<"}</button>
-                {item.quantity}
-                <button onClick={()=> handleAddClick(item)}>{">"}</button>
+        <div className="checkout-item-container">
+            <div className="image-container">
+                <img src={imageUrl} alt={`${name}`} />
+            </div>
+            <span className="name">{name}</span>
+            <span className="quantity">
+                <div onClick={reduceItemHandler} className="arrow">
+                    &#10094;
+                </div>
+                <span className="value">{quantity}</span>
+                <div className="arrow" onClick={addItemHandler} >
+                    &#10095;
+                </div>
             </span>
-            <span className="checkout-price">{item.price}</span>
-            <button onClick={() => handleRemoveClick(item)}>X</button>
+            <span className="price">{price}</span>
+            <div className="removeButton">
+                <div className="remove-button" onClick={removeItemHandler}>
+                    &#10005;
+                </div>
+            </div>
         </div>
     )    
 };
